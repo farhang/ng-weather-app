@@ -9,6 +9,7 @@ import { DevModule } from './dev/dev.module';
 import { HeaderComponent } from './shared/layout/header/header.component';
 import { FooterComponent } from './shared/layout/footer/footer.component';
 import { HomeModule } from './home/home.module';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,8 @@ import { HomeModule } from './home/home.module';
     SharedModule,
     AppRoutingModule,
     DevModule,
+    // forRoot() modules
+    ToastrModule.forRoot(),
     // Features Modules
     HomeModule,
   ],

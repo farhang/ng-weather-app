@@ -13,7 +13,6 @@ import { ToastrModule } from 'ngx-toastr';
   exports: [
     CommonModule,
     HttpClientModule,
-    ToastrModule,
   ]
 })
 export class SharedModule {}
