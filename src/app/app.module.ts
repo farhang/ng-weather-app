@@ -17,12 +17,14 @@ import { HomeModule } from './home/home.module';
     FooterComponent,
   ],
   imports: [
+    // Main Modules
     BrowserModule,
     CoreModule,
     SharedModule,
-    HomeModule,
+    AppRoutingModule,
     DevModule,
-    AppRoutingModule
+    // Features Modules
+    HomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
