@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { Forecast } from '../models/forecast';
-import { Weather } from '../models/weather';
 
 @Injectable()
 export class OpenWeatherMapService {
@@ -16,14 +14,18 @@ export class OpenWeatherMapService {
    * @return weather Object.
    * @link https://openweathermap.org/api | More info
    */
-  public getWeather(options: OpenWeatherMapOptions): Observable<Weather> {
+  public getWeather(
+    options: OpenWeatherMapRequest
+  ): Observable<OpenWeatherMapCurrentWeatherResponse> {
     let getParams = '';
     if (environment.mock) {
-      return this.httpClient.get<Weather>('/assets/mocks/open-weather-map-mock-weather.json');
+      return this.httpClient.get<OpenWeatherMapCurrentWeatherResponse>(
+        '/app/core/mocks/open-weather-map-mock-weather.json'
+      );
     } else {
       getParams = this.convertObjectToApiParams(options);
     }
-    return this.httpClient.jsonp<Weather>(
+    return this.httpClient.jsonp<OpenWeatherMapCurrentWeatherResponse>(
       `${this.baseUrl}weather?APPID=${environment.apiKey}&${getParams}`,
       'callback'
     );
@@ -34,14 +36,18 @@ export class OpenWeatherMapService {
    * @return forecast Object.
    * @link https://openweathermap.org/api | More info
    */
-  public getForecast(options: OpenWeatherMapOptions): Observable<Forecast> {
+  public getForecast(
+    options: OpenWeatherMapRequest
+  ): Observable<OpenWeatherMapForecastResponse> {
     let getParams = '';
     if (environment.mock) {
-      return this.httpClient.get<Forecast>('/assets/mocks/open-weather-map-mock-forecast.json');
+      return this.httpClient.get<OpenWeatherMapForecastResponse>(
+        '/app/core/mocks/open-weather-map-mock-forecast.json'
+      );
     } else {
       getParams = this.convertObjectToApiParams(options);
     }
-    return this.httpClient.jsonp<Forecast>(
+    return this.httpClient.jsonp<OpenWeatherMapForecastResponse>(
       `${this.baseUrl}forecast?APPID=${environment.apiKey}&${getParams}`,
       'callback'
     );
@@ -53,13 +59,84 @@ export class OpenWeatherMapService {
   private convertObjectToApiParams(options) {
     let params = '';
     Object.keys(options).map(function(key, i) {
-      params += Object.keys(options).length === i + 1 ? `${key}=${options[key]}` : `${key}=${options[key]}&`;
+      params +=
+        Object.keys(options).length === i + 1
+          ? `${key}=${options[key]}`
+          : `${key}=${options[key]}&`;
     });
     return params;
   }
 }
 
-export interface OpenWeatherMapOptions {
-  q: string;
-  units: string;
+export interface OpenWeatherMapRequest {
+  id?: number;
+  q?: string;
+  lat?: number;
+  lon?: number;
+  zip?: number;
+  units?: 'imperial' | 'metric';
+  lang?: string;
+}
+
+export interface OpenWeatherMapForecastResponse {
+  cod: string;
+  message: number;
+  cnt: number;
+  list: OpenWeatherMapForecastResponseElement;
+}
+
+export interface OpenWeatherMapCurrentWeatherResponse {
+  base: string;
+  clouds: object;
+  cod: number;
+  coord: { lon: number; lat: number };
+  dt: number;
+  id: number;
+  main: {
+    temp: number;
+    pressure: number;
+    humidity: number;
+    temp_min: number;
+    temp_max: number;
+  };
+  name: string;
+  sys: {
+    type: number;
+    id: number;
+    message: number;
+    country: string;
+    sunrise: number;
+    sunset: number;
+  };
+  visibility: number;
+  weather: [{
+    id: number;
+    main: string;
+    description: string;
+    icon: string;
+  }];
+  wind: { speed: number; deg: number };
+}
+
+export interface OpenWeatherMapForecastResponseElement {
+  clouds: {
+    all: number;
+  };
+  dt: number;
+  dt_txt: string;
+  main: {
+    temp: number;
+    temp_min: number;
+    temp_max: number;
+    pressure: number;
+    sea_level: number;
+    grnd_level: number;
+    humidity: number;
+    temp_kf: number;
+  };
+  sys: {
+    pod: string;
+  };
+  weather: [{ id: number; main: string; description: string; icon: string }];
+  wind: { speed: number; deg: number };
 }
