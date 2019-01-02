@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeaderComponent } from './header.component';
+import { BtnSwitcherComponent } from '../../shared/btn-switcher/btn-switcher.component';
+import { SharedModule } from '../../shared/shared.module';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -8,7 +10,8 @@ describe('HeaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HeaderComponent ]
+      declarations: [ HeaderComponent, BtnSwitcherComponent ],
+      imports: [SharedModule]
     })
     .compileComponents();
   }));

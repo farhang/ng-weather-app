@@ -6,22 +6,22 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { DevModule } from './dev/dev.module';
-import { HeaderComponent } from './shared/layout/header/header.component';
-import { FooterComponent } from './shared/layout/footer/footer.component';
-import { HomeModule } from './home/home.module';
 import { ToastrModule } from 'ngx-toastr';
+import { HeaderModule } from './core/header/header.module';
+import { FooterModule } from './core/footer/footer.module';
+import { HomeModule } from './home/home.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    FooterComponent,
   ],
   imports: [
     // Main Modules
     BrowserModule,
     CoreModule,
     SharedModule,
+    HeaderModule,
+    FooterModule,
     AppRoutingModule,
     DevModule,
     // forRoot() modules

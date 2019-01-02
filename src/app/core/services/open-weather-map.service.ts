@@ -78,13 +78,6 @@ export interface OpenWeatherMapRequest {
   lang?: string;
 }
 
-export interface OpenWeatherMapForecastResponse {
-  cod: string;
-  message: number;
-  cnt: number;
-  list: OpenWeatherMapForecastResponseElement;
-}
-
 export interface OpenWeatherMapCurrentWeatherResponse {
   base: string;
   clouds: object;
@@ -118,6 +111,14 @@ export interface OpenWeatherMapCurrentWeatherResponse {
   wind: { speed: number; deg: number };
 }
 
+export interface OpenWeatherMapForecastResponse {
+  cod: string;
+  message: number;
+  cnt: number;
+  list: [OpenWeatherMapForecastResponseElement];
+}
+
+
 export interface OpenWeatherMapForecastResponseElement {
   clouds: {
     all: number;
@@ -139,4 +140,5 @@ export interface OpenWeatherMapForecastResponseElement {
   };
   weather: [{ id: number; main: string; description: string; icon: string }];
   wind: { speed: number; deg: number };
+  snow: {};
 }

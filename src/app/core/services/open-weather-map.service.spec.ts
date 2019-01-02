@@ -1,8 +1,9 @@
 import { getTestBed, TestBed } from '@angular/core/testing';
-import { OpenWeatherMapService } from './open-weather-map.service';
+import {
+  OpenWeatherMapCurrentWeatherResponse, OpenWeatherMapForecastResponse,
+  OpenWeatherMapService
+} from './open-weather-map.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { Weather } from '../models/weather';
-import { Forecast } from '../models/forecast';
 
 describe('OpenWeatherMapService', () => {
   let httpMock: HttpTestingController;
@@ -23,7 +24,7 @@ describe('OpenWeatherMapService', () => {
   });
 
   it('should get the current weather', () => {
-    const dummyCurrentWeather: Weather = {
+    const dummyCurrentWeather: OpenWeatherMapCurrentWeatherResponse = {
       base: 'stations',
       clouds: { all: 0 },
       cod: 200,
@@ -44,13 +45,15 @@ describe('OpenWeatherMapService', () => {
   });
 
   it('should  get 5 next days per 3 hour forecast', () => {
-    const dummyNextRecentWeather: Forecast = {
+    const dummyNextRecentWeather: OpenWeatherMapForecastResponse = {
       cod: '200',
       message: 0.0247,
       cnt: 40,
       list: [
         {
+          clouds: { all: 0 },
           dt: 1544875200,
+          dt_txt: '2018-12-15 12:00:00',
           main: {
             temp: 1.31,
             temp_min: 1.31,
@@ -61,15 +64,13 @@ describe('OpenWeatherMapService', () => {
             humidity: 100,
             temp_kf: -0.11
           },
+          sys: { pod: 'd' },
           weather: [{ id: 800, main: 'Clear', description: 'clear sky', icon: '01d' }],
-          clouds: { all: 0 },
           wind: {
             speed: 8.72,
             deg: 150.502
           },
           snow: {},
-          sys: { pod: 'd' },
-          dt_txt: '2018-12-15 12:00:00'
         }
       ]
     };

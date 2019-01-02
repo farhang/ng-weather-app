@@ -1,3 +1,9 @@
+/* TODO: Remove these three variable if theme was changed. or change the structure of these like $variables structure */
 $main-color: #fff;
 $bg-gradient-start: #4A92AD;
 $bg-gradient-end: #3758A2;
+
+$variables: (
+  --headerColor: var(--headerColor),
+  --footerColor: var(--footerColor)
+);

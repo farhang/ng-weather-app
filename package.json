@@ -16,7 +16,7 @@
     }
   },
   "lint-staged": {
-    "*.{scss,html,md}": [
+    "./src/app/*.{scss,html,md}": [
       "ng lint --fix",
       "prettier --write",
       "git add"
