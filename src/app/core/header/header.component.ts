@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  defaultStyleMode = 'dark';
+  defaultStyleMode = 'light';
+  secondStyleMode = 'dark';
   private themeWrapper = document.querySelector('body');
 
   ngOnInit() {
@@ -15,7 +16,9 @@ export class HeaderComponent implements OnInit {
   }
 
   getCurrentStyle(currentStyle) {
+    currentStyle = currentStyle ? 'light' : 'dark';
     this.themeWrapper.style.setProperty('--headerColor', currentStyle === 'light' ? '#999' : '#555');
+    this.themeWrapper.style.setProperty('--btnLabelColor', currentStyle === 'light' ? '#555' : '#999');
   }
 
 }

@@ -1,3 +1,13 @@
-<header class="container is-fluid">
-  <app-btn-switcher [switcherStyleMode]="defaultStyleMode" (styleChange)="getCurrentStyle($event)"></app-btn-switcher>
+<header>
+  <div class="container is-fluid">
+    <app-btn-switcher
+      [firstValue]="0"
+      [secondValue]="1"
+      [value]="1"
+      [firstValueLabel]="defaultStyleMode"
+      [secondValueLabel]="secondStyleMode"
+      (valueChange)="getCurrentStyle($event)"
+    >
+    </app-btn-switcher>
+  </div>
 </header>

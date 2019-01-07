@@ -7,8 +7,8 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display home works!', () => {
+  /*it('should display home works!', () => {
     page.navigateTo();
     expect(page.getParagraphText()).toEqual('header works!');
-  });
+  });*/
 });

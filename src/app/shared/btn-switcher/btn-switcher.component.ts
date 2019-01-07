@@ -1,24 +1,33 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-btn-switcher',
-  templateUrl: './btn-switcher.component.html',
+  template: `
+    <span class="labels">{{firstValueLabel}}</span>
+    <label class="switch">
+      <input type="checkbox" (change)="changeValue()" [checked]="isFirstValue()">
+      <span class="slider round"></span>
+    </label>
+    <span class="labels">{{secondValueLabel}}</span>
+  `,
   styleUrls: ['./btn-switcher.component.scss']
 })
 
-export class BtnSwitcherComponent implements OnInit {
-  @Input() switcherStyleMode: SwitcherStyleMode;
-  @Output() styleChange = new EventEmitter<string>();
-  currentStyleMode: boolean;
+export class BtnSwitcherComponent {
+  @Input() firstValue: any;
+  @Input() secondValue: any;
+  @Input() firstValueLabel: string;
+  @Input() secondValueLabel: string;
+  @Input() value: any;
+  @Output() valueChange = new EventEmitter<any>();
 
-  ngOnInit() {
-    this.currentStyleMode = this.switcherStyleMode === 'dark';
+  changeValue() {
+    this.value = this.isFirstValue() ? this.secondValue : this.firstValue;
+    this.valueChange.emit(this.value);
   }
 
-  setCurrentStyle(currentStyle) {
-    this.switcherStyleMode = currentStyle ? 'light' : 'dark';
-    this.styleChange.emit(this.switcherStyleMode);
+  isFirstValue() {
+    return this.value === this.firstValue;
   }
+
 }
-
-type SwitcherStyleMode = 'dark' | 'light';
