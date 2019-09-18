@@ -24,10 +24,8 @@ install:
   - npm install
 
 script:
-  - npm build
+  - npm run-script build
   - ls
-  - pwd
-  - cd $TRAVIS_BUILD_DIR
   - pwd
 deploy:
   provider: pages
