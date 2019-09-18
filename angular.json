@@ -48,6 +48,7 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
+              "baseHref": "https://farhang.github.io/ng-weather-app/",
               "budgets": [
                 {
                   "type": "initial",
